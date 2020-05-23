@@ -83,4 +83,42 @@ function ExpectedSD(game, percent, errOnInaccuracy){
     }
 }
 
-module.exports = ExpectedSD;
+function ESDCompare(baseESD,compareESD, cdeg){
+    const CONFIDENCE_DEGREE = cdeg;
+    const BASE_CASE = stats.CDFBetween(-1 * CONFIDENCE_DEGREE, CONFIDENCE_DEGREE, 0, 1) / 2;
+  
+    let inv = false;
+    let variance;
+    let bound;
+    if (compareESD > baseESD) {
+        inv = true;
+        variance = compareESD ** 2;
+        bound = CONFIDENCE_DEGREE * baseESD;
+    }
+    else {
+        variance = baseESD ** 2;
+        bound = CONFIDENCE_DEGREE * compareESD;
+    }
+    let esdc = stats.CDFBetween(-1 * bound, bound, 0, variance) / 2;
+
+    let besdc = BASE_CASE - esdc;
+  
+    if (inv){
+         besdc *= -1;
+    }
+  
+    return (besdc) * 100;
+}
+
+// compares two percents with ESDCompare
+function PercentCompare(game, baseP, compareP,cdeg){
+  let e1 = ExpectedSD(game,baseP);
+  let e2 = ExpectedSD(game,compareP);
+  return ESDCompare(e1,e2, cdeg);
+}
+
+module.exports = {
+    calc: ExpectedSD,
+    ESDCompare: ESDCompare,
+    PercentCompare: PercentCompare
+};
