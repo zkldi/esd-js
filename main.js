@@ -20,7 +20,7 @@ function CalcPScore(judgements, stddev, largestValue){
 }
 
 const ACCEPTABLE_ERROR = 0.001;
-const MAX_ITERATIONS = 100;
+const MAX_ITERATIONS = 50;
 
 // Calculates the ExpectedSD.
 function ExpectedSD(game, percent, errOnInaccuracy){
@@ -71,6 +71,11 @@ function ExpectedSD(game, percent, errOnInaccuracy){
             minSD = estSD;
         }
 
+        if (estSD === (minSD + maxSD) / 2) {
+            // if it isn't moving, just terminate
+            break;
+        }
+
         estSD = (minSD + maxSD) / 2;
     }
 
@@ -78,12 +83,12 @@ function ExpectedSD(game, percent, errOnInaccuracy){
         throw "Did not reach value within MAX_ITERATIONS (" + MAX_ITERATIONS + ")";
     }
     else {
-        console.warn("Did not reach value within MAX_ITERATIONS (" + MAX_ITERATIONS + "), returning last estimate.")
+        console.warn("Did not reach value within MAX_ITERATIONS (" + MAX_ITERATIONS + "), returning last estimate (" + estSD + "), which was generated from " + percent + ".")
         return estSD;
     }
 }
 
-function ESDCompare(baseESD,compareESD, cdeg){
+function ESDCompare(baseESD,compareESD, cdeg=1){
     const CONFIDENCE_DEGREE = cdeg;
     const BASE_CASE = stats.CDFBetween(-1 * CONFIDENCE_DEGREE, CONFIDENCE_DEGREE, 0, 1) / 2;
   
@@ -112,9 +117,9 @@ function ESDCompare(baseESD,compareESD, cdeg){
 
 // compares two percents with ESDCompare
 function PercentCompare(game, baseP, compareP,cdeg){
-  let e1 = ExpectedSD(game,baseP);
-  let e2 = ExpectedSD(game,compareP);
-  return ESDCompare(e1,e2, cdeg);
+    let e1 = ExpectedSD(game,baseP);
+    let e2 = ExpectedSD(game,compareP);
+    return ESDCompare(e1,e2, cdeg);
 }
 
 module.exports = {
