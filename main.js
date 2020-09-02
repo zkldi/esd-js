@@ -25,7 +25,7 @@ const MAX_ITERATIONS = 50;
 // Calculates the ExpectedSD.
 function ExpectedSD(game, percent, errOnInaccuracy){
     if (percent > 1 || percent < 0 || Number.isNaN(parseInt(percent))){
-        throw "Invalid percent. Percent must be between 0 and 1, and also a number.";
+        throw "(ESD-JS) Invalid percent. Percent must be between 0 and 1, and also a number.";
     }
     let judgements;
     let largestValue;
@@ -33,7 +33,7 @@ function ExpectedSD(game, percent, errOnInaccuracy){
         judgements = config.judgements[game];
 
         if (!judgements){
-            throw "No default configuration for this game.";
+            throw "(ESD-JS) No default configuration for this game.";
         }
         largestValue = config.judgements[game][0].value;
     }
@@ -42,7 +42,7 @@ function ExpectedSD(game, percent, errOnInaccuracy){
         largestValue = judgements.sort((a,b) => b.value - a.value)[0].value;
     }
     else{
-        throw "Unknown parameter passed as game.";
+        throw "(ESD-JS) Unknown parameter passed as game.";
     }
 
     // massive optimisation possible here by using better initial estimates with precalc'd table of values.
@@ -64,7 +64,7 @@ function ExpectedSD(game, percent, errOnInaccuracy){
             return estSD;
         }
 
-        if (pScore <  percent){
+        if (pScore < percent){
             maxSD = estSD;
         }
         else {
@@ -80,10 +80,10 @@ function ExpectedSD(game, percent, errOnInaccuracy){
     }
 
     if (errOnInaccuracy){
-        throw "Did not reach value within MAX_ITERATIONS (" + MAX_ITERATIONS + ")";
+        throw "(ESD-JS) Did not reach value within MAX_ITERATIONS (" + MAX_ITERATIONS + ")";
     }
     else {
-        console.warn("Did not reach value within MAX_ITERATIONS (" + MAX_ITERATIONS + "), returning last estimate (" + estSD + "), which was generated from " + percent + ".")
+        console.warn("(ESD-JS) Did not reach value within MAX_ITERATIONS (" + MAX_ITERATIONS + "), returning last estimate (" + estSD + "), which was generated from " + percent + ".")
         return estSD;
     }
 }
