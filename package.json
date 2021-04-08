@@ -1,25 +1,25 @@
 {
-  "name": "esd-js",
-  "version": "1.4.0",
-  "description": "An implementation of ESD in javascript",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zkldi/esd-js.git"
-  },
-  "keywords": [
-    "statistics",
-    "rhythm",
-    "game"
-  ],
-  "author": "zkldi",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zkldi/esd-js/issues"
-  },
-  "homepage": "https://github.com/zkldi/esd-js#readme",
-  "types": "index.d.ts"
+    "name": "esd-js",
+    "version": "1.4.1",
+    "description": "An implementation of ESD in javascript",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zkldi/esd-js.git"
+    },
+    "keywords": [
+        "statistics",
+        "rhythm",
+        "game"
+    ],
+    "author": "zkldi",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/zkldi/esd-js/issues"
+    },
+    "homepage": "https://github.com/zkldi/esd-js#readme",
+    "types": "index.d.ts"
 }
