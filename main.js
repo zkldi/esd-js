@@ -88,7 +88,7 @@ function ExpectedSD(game, percent, errOnInaccuracy){
     }
 }
 
-function ESDCompare(baseESD,compareESD, cdeg=1){
+function ESDCompare(baseESD, compareESD, cdeg=1){
     const CONFIDENCE_DEGREE = cdeg;
     const BASE_CASE = stats.CDFBetween(-1 * CONFIDENCE_DEGREE, CONFIDENCE_DEGREE, 0, 1) / 2;
   

@@ -20,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/zkldi/esd-js/issues"
   },
-  "homepage": "https://github.com/zkldi/esd-js#readme"
+  "homepage": "https://github.com/zkldi/esd-js#readme",
+  "types": "index.d.ts"
 }
